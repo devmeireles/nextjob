@@ -6,3 +6,6 @@ test-controllers:
 
 see-converage:
 	go tool cover -html=coverage.out
+
+build-swagger:
+	swag init
