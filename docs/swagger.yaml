@@ -10,6 +10,28 @@ info:
   contact: {}
   license: {}
 paths:
+  /skill:
+    post:
+      consumes:
+      - application/json
+      description: Create a new skill with the input paylod
+      parameters:
+      - description: Create skill
+        in: body
+        name: skill
+        required: true
+        schema:
+          $ref: '#/definitions/models.Skill'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Skill'
+      summary: Create a new skill
+      tags:
+      - skills
   /skill/{id}:
     get:
       consumes:

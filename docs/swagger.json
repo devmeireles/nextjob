@@ -5,6 +5,40 @@
         "license": {}
     },
     "paths": {
+        "/skill": {
+            "post": {
+                "description": "Create a new skill with the input paylod",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "skills"
+                ],
+                "summary": "Create a new skill",
+                "parameters": [
+                    {
+                        "description": "Create skill",
+                        "name": "skill",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Skill"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Skill"
+                        }
+                    }
+                }
+            }
+        },
         "/skill/{id}": {
             "get": {
                 "description": "Get details of skill corresponding to the input id",

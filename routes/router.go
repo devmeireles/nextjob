@@ -27,6 +27,7 @@ func (server *Server) SetupRoutes() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/skills", controller.GetAllSkills).Methods("GET")
 	r.HandleFunc("/skill/{id}", controller.GetSkill).Methods("GET")
+	r.HandleFunc("/skill", controller.CreateSkill).Methods("POST")
 
 	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 

@@ -1,8 +1,12 @@
 package controller
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"net/http"
 	"strconv"
+
+	"github.com/devmeireles/jobfinder/models"
 
 	"github.com/devmeireles/jobfinder/services"
 	"github.com/devmeireles/jobfinder/utils"
@@ -53,4 +57,37 @@ func GetSkill(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	utils.ResSuc(w, skillReceived)
+}
+
+// CreateSkill godoc
+// @Summary Create a new skill
+// @Description Create a new skill with the input paylod
+// @Tags skills
+// @Accept  json
+// @Produce  json
+// @Param skill body models.Skill true "Create skill"
+// @Success 200 {object} models.Skill
+// @Router /skill [post]
+func CreateSkill(w http.ResponseWriter, r *http.Request) {
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	skill := models.Skill{}
+	err = json.Unmarshal(body, &skill)
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	newSkill, err := services.CreateSkill(&skill)
+
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+	utils.ResSuc(w, newSkill)
+
 }

@@ -1,11 +1,13 @@
 package controller
 
 import (
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"testing"
 
+	"github.com/devmeireles/jobfinder/models"
 	"github.com/devmeireles/jobfinder/utils"
 	"github.com/gorilla/mux"
 	"github.com/steinfletcher/apitest"
@@ -26,6 +28,7 @@ func TestSkills(t *testing.T) {
 	r := mux.NewRouter()
 	r.HandleFunc("/skill/{id}", GetSkill).Methods("GET")
 	r.HandleFunc("/skills", GetAllSkills).Methods("GET")
+	r.HandleFunc("/skill", CreateSkill).Methods("POST")
 	ts := httptest.NewServer(r)
 	defer ts.Close()
 
@@ -65,37 +68,19 @@ func TestSkills(t *testing.T) {
 			End()
 	})
 
-	// t.Run("Get all skills", func(t *testing.T) {
-	// 	req, err := http.NewRequest("GET", "/skills", nil)
-	// 	if err != nil {
-	// 		t.Fatal(err)
-	// 	}
+	t.Run("Create a skill", func(t *testing.T) {
+		var skill = models.Skill{
+			Status: 1,
+			Title:  "Google Cloud",
+		}
+		skillSave, _ := json.Marshal(skill)
 
-	// 	rr := httptest.NewRecorder()
-	// 	handler := http.HandlerFunc(GetAllSkills)
-
-	// 	handler.ServeHTTP(rr, req)
-
-	// 	parsedBody := utils.ParseBody(rr)
-
-	// 	assert.True(t, parsedBody.Success)
-	// 	assert.Equal(t, http.StatusOK, rr.Code)
-	// })
-
-	// t.Run("Get a skill", func(t *testing.T) {
-	// 	req, err := http.NewRequest("GET", "/skill/1", nil)
-	// 	if err != nil {
-	// 		t.Fatal(err)
-	// 	}
-
-	// 	rr := httptest.NewRecorder()
-	// 	handler := http.HandlerFunc(GetSkill)
-
-	// 	handler.ServeHTTP(rr, req)
-
-	// 	parsedBody := utils.ParseBody(rr)
-
-	// 	assert.True(t, parsedBody.Success)
-	// 	assert.Equal(t, http.StatusOK, rr.Code)
-	// })
+		apitest.New().
+			Handler(r).
+			Post("/skill").
+			JSON(skillSave).
+			Expect(t).
+			Status(http.StatusOK).
+			End()
+	})
 }

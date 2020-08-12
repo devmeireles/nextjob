@@ -32,3 +32,13 @@ func GetSkill(id int) (*models.Skill, error) {
 
 	return &skill, nil
 }
+
+func CreateSkill(skill *models.Skill) (*models.Skill, error) {
+	var db = utils.DBConn()
+
+	if err := db.Model(&models.Skill{}).Create(&skill).Error; err != nil {
+		return &models.Skill{}, err
+	}
+
+	return skill, nil
+}
