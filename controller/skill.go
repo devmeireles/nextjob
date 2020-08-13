@@ -124,3 +124,31 @@ func UpdateSkill(w http.ResponseWriter, r *http.Request) {
 
 	utils.ResSuc(w, updatedSkill)
 }
+
+// DeleteSkill godoc
+// @Summary Delete skill identified by the given id
+// @Description Delete the skill corresponding to the input id
+// @Tags skills
+// @Accept  json
+// @Produce  json
+// @Param id path int true "ID of the skill to be deleted"
+// @Success 204 "No Content"
+// @Router /skill/{id} [delete]
+func DeleteSkill(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	_, err = services.DeleteSkill(id)
+
+	if err != nil {
+		utils.ResErr(w, err, http.StatusNotFound)
+		return
+	}
+
+	utils.ResTrue(w)
+}

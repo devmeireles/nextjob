@@ -21,11 +21,11 @@ func main() {
 
 	utils.InitDatabase(
 		os.Getenv("DB_DRIVER"),
-		os.Getenv("DB_USER_DEV"),
-		os.Getenv("DB_PASSWORD_DEV"),
-		os.Getenv("DB_PORT_DEV"),
-		os.Getenv("DB_HOST_DEV"),
-		os.Getenv("DB_NAME_DEV"),
+		os.Getenv("DB_USER_TEST"),
+		os.Getenv("DB_PASSWORD_TEST"),
+		os.Getenv("DB_PORT_TEST"),
+		os.Getenv("DB_HOST_TEST"),
+		os.Getenv("DB_NAME_TEST"),
 	)
 
 	r := server.SetupRoutes()

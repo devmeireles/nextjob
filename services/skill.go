@@ -52,3 +52,23 @@ func UpdateSkill(skill *models.Skill, id int) (*models.Skill, error) {
 
 	return skill, nil
 }
+
+func DeleteSkill(id int) (*models.Skill, error) {
+	var err error
+	var skill models.Skill
+	var db = utils.DBConn()
+
+	err = db.Find(&skill, id).Error
+
+	if err != nil {
+		return &models.Skill{}, err
+	}
+
+	err = db.Delete(&skill, id).Error
+
+	if err != nil {
+		return &models.Skill{}, err
+	}
+
+	return &skill, nil
+}

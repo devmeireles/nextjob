@@ -9,7 +9,23 @@ import (
 
 type UnstructuredJSON = map[string]interface{}
 
-type Model struct{}
+func ResTrue(res http.ResponseWriter) {
+	res.Header().Set("Content-Type", "application/json")
+	res.WriteHeader(http.StatusOK)
+
+	response := models.ResponseMsg{
+		Success: true,
+	}
+
+	json, err := json.Marshal(response)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	res.Write(json)
+	return
+}
 
 func ResErr(res http.ResponseWriter, err error, statusCode int) {
 	res.Header().Set("Content-Type", "application/json")
