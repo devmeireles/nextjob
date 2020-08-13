@@ -99,8 +99,9 @@ func CreateSkill(w http.ResponseWriter, r *http.Request) {
 // @Accept  json
 // @Produce  json
 // @Param id path int true "ID of the skill to be updated"
+// @Param skill body models.Skill true "Create skill"
 // @Success 200 {object} models.Skill
-// @Router /skill/{id} [post]
+// @Router /skill/{id} [put]
 func UpdateSkill(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
