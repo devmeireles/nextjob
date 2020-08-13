@@ -21,7 +21,7 @@ func InitDatabase(Dbdriver, DbUser, DbPassword, DbPort, DbHost, DbName string) {
 		log.Fatal("This is the error:", err)
 	}
 
-	db.AutoMigrate(models.Skill{})
+	db.AutoMigrate(models.Skill{}, models.User{})
 }
 
 func DBConn() *gorm.DB {
