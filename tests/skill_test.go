@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"bytes"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
@@ -57,6 +58,40 @@ func TestGetSkill(t *testing.T) {
 
 	t.Run("Try to get a wrong parsed url skill", func(t *testing.T) {
 		req, _ := http.NewRequest("GET", "/skill/12x", nil)
+		response := executeRequest(req)
+		parsedBody := parseBody(response)
+
+		assert.False(t, parsedBody.Success)
+		assert.Equal(t, http.StatusInternalServerError, response.Code)
+	})
+
+	t.Run("Create a skill", func(t *testing.T) {
+		var skill = models.Skill{
+			Status: 1,
+			Title:  "Redis",
+		}
+
+		skillSave, _ := json.Marshal(skill)
+
+		req, _ := http.NewRequest("POST", "/skill", bytes.NewBuffer(skillSave))
+
+		response := executeRequest(req)
+		parsedBody := parseBody(response)
+
+		assert.True(t, parsedBody.Success)
+		assert.Equal(t, http.StatusOK, response.Code)
+	})
+
+	t.Run("Try to save existent a skill", func(t *testing.T) {
+		var skill = models.Skill{
+			Status: 1,
+			Title:  "MySQL",
+		}
+
+		skillSave, _ := json.Marshal(skill)
+
+		req, _ := http.NewRequest("POST", "/skill", bytes.NewBuffer(skillSave))
+
 		response := executeRequest(req)
 		parsedBody := parseBody(response)
 

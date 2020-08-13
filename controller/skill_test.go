@@ -1,11 +1,13 @@
 package controller
 
 import (
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"testing"
 
+	"github.com/devmeireles/jobfinder/models"
 	"github.com/devmeireles/jobfinder/utils"
 	"github.com/gorilla/mux"
 	"github.com/steinfletcher/apitest"
@@ -26,6 +28,9 @@ func TestSkills(t *testing.T) {
 	r := mux.NewRouter()
 	r.HandleFunc("/skill/{id}", GetSkill).Methods("GET")
 	r.HandleFunc("/skills", GetAllSkills).Methods("GET")
+	r.HandleFunc("/skill", CreateSkill).Methods("POST")
+	r.HandleFunc("/skill/{id}", UpdateSkill).Methods("PUT")
+	r.HandleFunc("/skill/{id}", DeleteSkill).Methods("DELETE")
 	ts := httptest.NewServer(r)
 	defer ts.Close()
 
@@ -41,7 +46,7 @@ func TestSkills(t *testing.T) {
 	t.Run("found", func(t *testing.T) {
 		apitest.New().
 			Handler(r).
-			Get("/skill/1").
+			Get("/skill/40").
 			Expect(t).
 			Status(http.StatusOK).
 			End()
@@ -65,37 +70,71 @@ func TestSkills(t *testing.T) {
 			End()
 	})
 
-	// t.Run("Get all skills", func(t *testing.T) {
-	// 	req, err := http.NewRequest("GET", "/skills", nil)
-	// 	if err != nil {
-	// 		t.Fatal(err)
-	// 	}
+	t.Run("Create a skill", func(t *testing.T) {
+		var skill = models.Skill{
+			Status: 1,
+			Title:  "Google Cloud+10xxx",
+		}
+		skillSave, _ := json.Marshal(skill)
 
-	// 	rr := httptest.NewRecorder()
-	// 	handler := http.HandlerFunc(GetAllSkills)
+		apitest.New().
+			Handler(r).
+			Post("/skill").
+			JSON(skillSave).
+			Expect(t).
+			Status(http.StatusOK).
+			End()
+	})
 
-	// 	handler.ServeHTTP(rr, req)
+	t.Run("Update a skill", func(t *testing.T) {
+		var skill = models.Skill{
+			Title: "Google Cloud+20xxx",
+		}
+		skillSave, _ := json.Marshal(skill)
 
-	// 	parsedBody := utils.ParseBody(rr)
+		apitest.New().
+			Handler(r).
+			Method(http.MethodPut).
+			URL("/skill/41").
+			JSON(skillSave).
+			Expect(t).
+			Status(http.StatusOK).
+			End()
+	})
 
-	// 	assert.True(t, parsedBody.Success)
-	// 	assert.Equal(t, http.StatusOK, rr.Code)
-	// })
+	t.Run("Update a skill but with a existent title", func(t *testing.T) {
+		var skill = models.Skill{
+			Title: "Google Cloud+20xx",
+		}
+		skillUpdate, _ := json.Marshal(skill)
 
-	// t.Run("Get a skill", func(t *testing.T) {
-	// 	req, err := http.NewRequest("GET", "/skill/1", nil)
-	// 	if err != nil {
-	// 		t.Fatal(err)
-	// 	}
+		apitest.New().
+			Handler(r).
+			Method(http.MethodPut).
+			URL("/skill/41").
+			JSON(skillUpdate).
+			Expect(t).
+			Status(http.StatusInternalServerError).
+			End()
+	})
 
-	// 	rr := httptest.NewRecorder()
-	// 	handler := http.HandlerFunc(GetSkill)
+	t.Run("delete a skill", func(t *testing.T) {
+		apitest.New().
+			Handler(r).
+			Method(http.MethodDelete).
+			URL("/skill/45").
+			Expect(t).
+			Status(http.StatusOK).
+			End()
+	})
 
-	// 	handler.ServeHTTP(rr, req)
-
-	// 	parsedBody := utils.ParseBody(rr)
-
-	// 	assert.True(t, parsedBody.Success)
-	// 	assert.Equal(t, http.StatusOK, rr.Code)
-	// })
+	t.Run("try to delete a unexistent skill", func(t *testing.T) {
+		apitest.New().
+			Handler(r).
+			Method(http.MethodDelete).
+			URL("/skill/4543543").
+			Expect(t).
+			Status(http.StatusNotFound).
+			End()
+	})
 }

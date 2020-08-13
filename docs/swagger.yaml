@@ -10,7 +10,47 @@ info:
   contact: {}
   license: {}
 paths:
+  /skill:
+    post:
+      consumes:
+      - application/json
+      description: Create a new skill with the input paylod
+      parameters:
+      - description: Create skill
+        in: body
+        name: skill
+        required: true
+        schema:
+          $ref: '#/definitions/models.Skill'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Skill'
+      summary: Create a new skill
+      tags:
+      - skills
   /skill/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the skill corresponding to the input id
+      parameters:
+      - description: ID of the skill to be deleted
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+      summary: Delete skill identified by the given id
+      tags:
+      - skills
     get:
       consumes:
       - application/json
@@ -29,6 +69,32 @@ paths:
           schema:
             $ref: '#/definitions/models.Skill'
       summary: Get details for a given skill id
+      tags:
+      - skills
+    put:
+      consumes:
+      - application/json
+      description: Update the skill corresponding to the input id
+      parameters:
+      - description: ID of the skill to be updated
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Create skill
+        in: body
+        name: skill
+        required: true
+        schema:
+          $ref: '#/definitions/models.Skill'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Skill'
+      summary: Update skill identified by the given id
       tags:
       - skills
   /skills:
