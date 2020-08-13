@@ -6,6 +6,17 @@ definitions:
       title:
         type: string
     type: object
+  models.User:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      user_type:
+        type: integer
+      username:
+        type: string
+    type: object
 info:
   contact: {}
   license: {}
@@ -114,4 +125,26 @@ paths:
       summary: Get details of all skills
       tags:
       - skills
+  /user:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user with the input paylod
+      parameters:
+      - description: Create user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Create a new user
+      tags:
+      - users
 swagger: "2.0"
