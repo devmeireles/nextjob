@@ -42,3 +42,13 @@ func CreateSkill(skill *models.Skill) (*models.Skill, error) {
 
 	return skill, nil
 }
+
+func UpdateSkill(skill *models.Skill, id int) (*models.Skill, error) {
+	var db = utils.DBConn()
+
+	if err := db.Model(&models.Skill{}).Where("id = ?", id).Update(&skill).Error; err != nil {
+		return &models.Skill{}, err
+	}
+
+	return skill, nil
+}

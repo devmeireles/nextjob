@@ -91,3 +91,35 @@ func CreateSkill(w http.ResponseWriter, r *http.Request) {
 	utils.ResSuc(w, newSkill)
 
 }
+
+// UpdateSkill godoc
+// @Summary Update skill identified by the given id
+// @Description Update the skill corresponding to the input id
+// @Tags skills
+// @Accept  json
+// @Produce  json
+// @Param id path int true "ID of the skill to be updated"
+// @Success 200 {object} models.Skill
+// @Router /skill/{id} [post]
+func UpdateSkill(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	skill := models.Skill{}
+	err = json.Unmarshal(body, &skill)
+
+	updatedSkill, err := services.UpdateSkill(&skill, id)
+
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	utils.ResSuc(w, updatedSkill)
+}
