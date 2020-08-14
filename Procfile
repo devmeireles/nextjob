@@ -1,1 +1,1 @@
-web: nextjob
+web: bin/nextjob
