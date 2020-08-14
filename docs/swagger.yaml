@@ -27,9 +27,9 @@ paths:
     post:
       consumes:
       - application/json
-      description: Create a new skill with the input paylod
+      description: Create a new skill with the input
       parameters:
-      - description: Create skill
+      - description: Create a skill
         in: body
         name: skill
         required: true

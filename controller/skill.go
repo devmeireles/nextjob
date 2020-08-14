@@ -61,11 +61,11 @@ func GetSkill(w http.ResponseWriter, r *http.Request) {
 
 // CreateSkill godoc
 // @Summary Create a new skill
-// @Description Create a new skill with the input paylod
+// @Description Create a new skill with the input
 // @Tags skills
 // @Accept  json
 // @Produce  json
-// @Param skill body models.Skill true "Create skill"
+// @Param skill body models.Skill true "Create a skill"
 // @Success 200 {object} models.Skill
 // @Router /skill [post]
 func CreateSkill(w http.ResponseWriter, r *http.Request) {

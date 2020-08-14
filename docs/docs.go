@@ -27,7 +27,7 @@ var doc = `{
     "paths": {
         "/skill": {
             "post": {
-                "description": "Create a new skill with the input paylod",
+                "description": "Create a new skill with the input",
                 "consumes": [
                     "application/json"
                 ],
@@ -40,7 +40,7 @@ var doc = `{
                 "summary": "Create a new skill",
                 "parameters": [
                     {
-                        "description": "Create skill",
+                        "description": "Create a skill",
                         "name": "skill",
                         "in": "body",
                         "required": true,
