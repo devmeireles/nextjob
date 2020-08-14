@@ -2,6 +2,7 @@ package utils
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http/httptest"
 	"os"
@@ -9,7 +10,6 @@ import (
 
 	"github.com/devmeireles/nextjob/models"
 	"github.com/joho/godotenv"
-	log "github.com/sirupsen/logrus"
 )
 
 const projectDirName = "nextjob-api"
@@ -22,12 +22,14 @@ func LoadEnv() {
 
 	err := godotenv.Load(string(rootPath) + `/.env`)
 	if err != nil {
-		log.WithFields(log.Fields{
-			"cause": err,
-			"cwd":   cwd,
-		}).Fatal("Problem loading .env file")
+		// log.WithFields(log.Fields{
+		// 	"cause": err,
+		// 	"cwd":   cwd,
+		// }).Fatal("Problem loading .env file")
 
-		os.Exit(-1)
+		// os.Exit(-1)
+
+		fmt.Println(err)
 	}
 }
 
