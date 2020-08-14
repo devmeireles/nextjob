@@ -26,7 +26,7 @@ func TestUser(t *testing.T) {
 	)
 
 	r := mux.NewRouter()
-	// r.HandleFunc("/user/{id}", GetUser).Methods("GET")
+	r.HandleFunc("/user/{id}", GetUser).Methods("GET")
 	r.HandleFunc("/users", GetAllUsers).Methods("GET")
 	r.HandleFunc("/user", CreateUser).Methods("POST")
 	// r.HandleFunc("/user/{id}", UpdateUser).Methods("PUT")
@@ -36,10 +36,10 @@ func TestUser(t *testing.T) {
 
 	t.Run("Create a user", func(t *testing.T) {
 		var user = models.User{
-			Email:    "mail@example.net",
-			Password: "723878g37242732243",
-			Username: "ausernamexxx222",
-			Language: "en",
+			Email:    "mail@example.com.br",
+			Password: "723878g37242732243121",
+			Username: "au12sernamexxx222",
+			Language: "es",
 		}
 		userSave, _ := json.Marshal(user)
 
@@ -58,6 +58,24 @@ func TestUser(t *testing.T) {
 			Get("/users").
 			Expect(t).
 			Status(http.StatusOK).
+			End()
+	})
+
+	t.Run("found", func(t *testing.T) {
+		apitest.New().
+			Handler(r).
+			Get("/user/40").
+			Expect(t).
+			Status(http.StatusOK).
+			End()
+	})
+
+	t.Run("found", func(t *testing.T) {
+		apitest.New().
+			Handler(r).
+			Get("/user/9045904").
+			Expect(t).
+			Status(http.StatusNotFound).
 			End()
 	})
 }
