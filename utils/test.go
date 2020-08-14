@@ -12,7 +12,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-const projectDirName = "nextjob"
+const projectDirName = "nextjob-api"
 
 // LoadEnv loads env vars from .env
 func LoadEnv() {
