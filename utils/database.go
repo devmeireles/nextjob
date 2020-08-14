@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/devmeireles/jobfinder/models"
+	"github.com/devmeireles/nextjob/models"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )

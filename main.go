@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/devmeireles/jobfinder/routes"
-	"github.com/devmeireles/jobfinder/utils"
+	"github.com/devmeireles/nextjob/routes"
+	"github.com/devmeireles/nextjob/utils"
 
 	"github.com/joho/godotenv"
 )

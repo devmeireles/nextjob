@@ -1,4 +1,4 @@
-module github.com/devmeireles/jobfinder
+module github.com/devmeireles/nextjob
 
 go 1.14
 

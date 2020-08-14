@@ -1,8 +1,8 @@
 package services
 
 import (
-	"github.com/devmeireles/jobfinder/models"
-	"github.com/devmeireles/jobfinder/utils"
+	"github.com/devmeireles/nextjob/models"
+	"github.com/devmeireles/nextjob/utils"
 )
 
 func CreateUser(user *models.User) (*models.User, error) {

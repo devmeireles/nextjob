@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/devmeireles/jobfinder/models"
+	"github.com/devmeireles/nextjob/models"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/devmeireles/jobfinder/models"
+	"github.com/devmeireles/nextjob/models"
 )
 
 type UnstructuredJSON = map[string]interface{}

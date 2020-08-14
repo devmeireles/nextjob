@@ -1,11 +1,11 @@
 package routes
 
 import (
-	"github.com/devmeireles/jobfinder/controller"
+	"github.com/devmeireles/nextjob/controller"
 
 	"github.com/gorilla/mux"
 
-	_ "github.com/devmeireles/jobfinder/docs"
+	_ "github.com/devmeireles/nextjob/docs"
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 

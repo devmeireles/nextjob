@@ -1,8 +1,8 @@
 package services
 
 import (
-	"github.com/devmeireles/jobfinder/models"
-	"github.com/devmeireles/jobfinder/utils"
+	"github.com/devmeireles/nextjob/models"
+	"github.com/devmeireles/nextjob/utils"
 )
 
 func GetAllSkills() (*[]models.Skill, error) {

@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/devmeireles/jobfinder/models"
-	"github.com/devmeireles/jobfinder/services"
-	"github.com/devmeireles/jobfinder/utils"
+	"github.com/devmeireles/nextjob/models"
+	"github.com/devmeireles/nextjob/services"
+	"github.com/devmeireles/nextjob/utils"
 	"github.com/gorilla/mux"
 )
 

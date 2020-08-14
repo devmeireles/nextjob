@@ -7,7 +7,7 @@ import (
 	"os"
 	"regexp"
 
-	"github.com/devmeireles/jobfinder/models"
+	"github.com/devmeireles/nextjob/models"
 	"github.com/joho/godotenv"
 	log "github.com/sirupsen/logrus"
 )

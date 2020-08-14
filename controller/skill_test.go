@@ -7,8 +7,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/devmeireles/jobfinder/models"
-	"github.com/devmeireles/jobfinder/utils"
+	"github.com/devmeireles/nextjob/models"
+	"github.com/devmeireles/nextjob/utils"
 	"github.com/gorilla/mux"
 	"github.com/steinfletcher/apitest"
 )
