@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -35,6 +36,8 @@ func main() {
 	if port == "" {
 		port = "3333"
 	}
+
+	fmt.Println(port)
 
 	log.Fatal(http.ListenAndServe(":"+port, r))
 }
