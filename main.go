@@ -20,13 +20,43 @@ func main() {
 		log.Fatal(err)
 	}
 
+	dbDriver := os.Getenv("DB_DRIVER")
+	if dbDriver == "" {
+		log.Fatal("$DB_DRIVER must be set")
+	}
+
+	dbUser := os.Getenv("DB_USER_TEST")
+	if dbUser == "" {
+		log.Fatal("$DB_USER_TEST must be set")
+	}
+
+	dbPassword := os.Getenv("DB_PASSWORD_TEST")
+	if dbPassword == "" {
+		log.Fatal("$DB_PASSWORD_TEST must be set")
+	}
+
+	dbPort := os.Getenv("DB_PORT_TEST")
+	if dbPort == "" {
+		log.Fatal("$DB_PORT_TEST must be set")
+	}
+
+	dbHost := os.Getenv("DB_HOST_TEST")
+	if dbHost == "" {
+		log.Fatal("$DB_HOST_TEST must be set")
+	}
+
+	dbName := os.Getenv("DB_NAME_TEST")
+	if dbName == "" {
+		log.Fatal("$DB_DRIVER must be set")
+	}
+
 	utils.InitDatabase(
-		os.Getenv("DB_DRIVER"),
-		os.Getenv("DB_USER_TEST"),
-		os.Getenv("DB_PASSWORD_TEST"),
-		os.Getenv("DB_PORT_TEST"),
-		os.Getenv("DB_HOST_TEST"),
-		os.Getenv("DB_NAME_TEST"),
+		dbDriver,
+		dbUser,
+		dbPassword,
+		dbPort,
+		dbHost,
+		dbName,
 	)
 
 	r := server.SetupRoutes()
