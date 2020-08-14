@@ -236,6 +236,9 @@ var doc = `{
                 "email": {
                     "type": "string"
                 },
+                "language": {
+                    "type": "string"
+                },
                 "password": {
                     "type": "string"
                 },
