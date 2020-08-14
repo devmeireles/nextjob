@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -37,11 +36,5 @@ func main() {
 		log.Fatal("PORT must be set")
 	}
 
-	fmt.Println(port)
-	fmt.Println(os.Getenv("DB_DRIVER"))
-	fmt.Println(os.Getenv("DB_USER_TEST"))
-	fmt.Println("LEU")
-
-	// log.Fatal(http.ListenAndServe(port, r))
-	log.Println(http.ListenAndServe(":"+port, r))
+	log.Fatal(http.ListenAndServe(":3333", r))
 }

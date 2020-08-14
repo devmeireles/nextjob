@@ -12,7 +12,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-const projectDirName = "nextjob-api"
+const projectDirName = "nextjob"
 
 // LoadEnv loads env vars from .env
 func LoadEnv() {
