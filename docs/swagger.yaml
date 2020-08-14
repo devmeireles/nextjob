@@ -149,4 +149,21 @@ paths:
       summary: Create a new user
       tags:
       - users
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Skill'
+            type: array
+      summary: Get details of all users
+      tags:
+      - users
 swagger: "2.0"

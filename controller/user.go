@@ -41,3 +41,22 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	utils.ResSuc(w, newUser)
 }
+
+// GetAllUsers godoc
+// @Summary Get details of all users
+// @Description Get details of all users
+// @Tags users
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.Skill
+// @Router /users [get]
+func GetAllUsers(w http.ResponseWriter, r *http.Request) {
+	skills, err := services.GetAllUsers()
+
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	utils.ResSuc(w, skills)
+}

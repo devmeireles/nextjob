@@ -35,6 +35,7 @@ func (server *Server) SetupRoutes() *mux.Router {
 
 	// User routes
 	r.HandleFunc("/user", controller.CreateUser).Methods("POST")
+	r.HandleFunc("/users", controller.GetAllUsers).Methods("GET")
 
 	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 

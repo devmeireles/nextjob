@@ -1,0 +1,63 @@
+package controller
+
+import (
+	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"testing"
+
+	"github.com/devmeireles/jobfinder/models"
+	"github.com/devmeireles/jobfinder/utils"
+	"github.com/gorilla/mux"
+	"github.com/steinfletcher/apitest"
+)
+
+func TestUser(t *testing.T) {
+	utils.LoadEnv()
+
+	utils.InitDatabase(
+		os.Getenv("DB_DRIVER_TEST"),
+		os.Getenv("DB_USER_TEST"),
+		os.Getenv("DB_PASSWORD_TEST"),
+		os.Getenv("DB_PORT_TEST"),
+		os.Getenv("DB_HOST_TEST"),
+		os.Getenv("DB_NAME_TEST"),
+	)
+
+	r := mux.NewRouter()
+	// r.HandleFunc("/user/{id}", GetUser).Methods("GET")
+	r.HandleFunc("/users", GetAllUsers).Methods("GET")
+	r.HandleFunc("/user", CreateUser).Methods("POST")
+	// r.HandleFunc("/user/{id}", UpdateUser).Methods("PUT")
+	// r.HandleFunc("/user/{id}", DeleteUser).Methods("DELETE")
+	ts := httptest.NewServer(r)
+	defer ts.Close()
+
+	t.Run("Create a user", func(t *testing.T) {
+		var user = models.User{
+			Email:    "mail@example.net",
+			Password: "723878g37242732243",
+			Username: "ausernamexxx222",
+			Language: "en",
+		}
+		userSave, _ := json.Marshal(user)
+
+		apitest.New().
+			Handler(r).
+			Post("/user").
+			JSON(userSave).
+			Expect(t).
+			Status(http.StatusOK).
+			End()
+	})
+
+	t.Run("get all users", func(t *testing.T) {
+		apitest.New().
+			Handler(r).
+			Get("/users").
+			Expect(t).
+			Status(http.StatusOK).
+			End()
+	})
+}
