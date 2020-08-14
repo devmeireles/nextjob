@@ -32,5 +32,9 @@ func main() {
 
 	port := os.Getenv("PORT")
 
-	http.ListenAndServe(port, r)
+	if port == "" {
+		log.Fatal("PORT must be set")
+	}
+
+	log.Println(http.ListenAndServe(":"+port, r))
 }
