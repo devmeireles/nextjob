@@ -227,6 +227,72 @@
                         }
                     }
                 }
+            },
+            "put": {
+                "description": "Update the user corresponding to the input id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update user identified by the given id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID of the user to be updated",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update user",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete the user corresponding to the input id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Delete user identified by the given id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID of the user to be deleted",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
             }
         },
         "/users": {

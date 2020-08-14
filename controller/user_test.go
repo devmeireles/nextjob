@@ -29,8 +29,8 @@ func TestUser(t *testing.T) {
 	r.HandleFunc("/user/{id}", GetUser).Methods("GET")
 	r.HandleFunc("/users", GetAllUsers).Methods("GET")
 	r.HandleFunc("/user", CreateUser).Methods("POST")
-	// r.HandleFunc("/user/{id}", UpdateUser).Methods("PUT")
-	// r.HandleFunc("/user/{id}", DeleteUser).Methods("DELETE")
+	r.HandleFunc("/user/{id}", UpdateUser).Methods("PUT")
+	r.HandleFunc("/user/{id}", DeleteUser).Methods("DELETE")
 	ts := httptest.NewServer(r)
 	defer ts.Close()
 
@@ -76,6 +76,33 @@ func TestUser(t *testing.T) {
 			Get("/user/9045904").
 			Expect(t).
 			Status(http.StatusNotFound).
+			End()
+	})
+
+	t.Run("Update a user", func(t *testing.T) {
+		var user = models.User{
+			Language: "es",
+			Username: "elgabo",
+		}
+		userSave, _ := json.Marshal(user)
+
+		apitest.New().
+			Handler(r).
+			Method(http.MethodPut).
+			URL("/user/40").
+			JSON(userSave).
+			Expect(t).
+			Status(http.StatusOK).
+			End()
+	})
+
+	t.Run("delete a user", func(t *testing.T) {
+		apitest.New().
+			Handler(r).
+			Method(http.MethodDelete).
+			URL("/user/1").
+			Expect(t).
+			Status(http.StatusOK).
 			End()
 	})
 }

@@ -89,3 +89,64 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	}
 	utils.ResSuc(w, userReceived)
 }
+
+// UpdateUser godoc
+// @Summary Update user identified by the given id
+// @Description Update the user corresponding to the input id
+// @Tags users
+// @Accept  json
+// @Produce  json
+// @Param id path int true "ID of the user to be updated"
+// @Param user body models.User true "Update user"
+// @Success 200 {object} models.User
+// @Router /user/{id} [put]
+func UpdateUser(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	user := models.User{}
+	err = json.Unmarshal(body, &user)
+
+	updatedUser, err := services.UpdateUser(&user, id)
+
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	utils.ResSuc(w, updatedUser)
+}
+
+// DeleteUser godoc
+// @Summary Delete user identified by the given id
+// @Description Delete the user corresponding to the input id
+// @Tags users
+// @Accept  json
+// @Produce  json
+// @Param id path int true "ID of the user to be deleted"
+// @Success 204 "No Content"
+// @Router /user/{id} [delete]
+func DeleteUser(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	_, err = services.DeleteUser(id)
+
+	if err != nil {
+		utils.ResErr(w, err, http.StatusNotFound)
+		return
+	}
+
+	utils.ResTrue(w)
+}

@@ -42,3 +42,33 @@ func GetUser(id int) (*models.User, error) {
 
 	return &user, nil
 }
+
+func UpdateUser(user *models.User, id int) (*models.User, error) {
+	var db = utils.DBConn()
+
+	if err := db.Model(&models.User{}).Where("id = ?", id).Update(&user).Error; err != nil {
+		return &models.User{}, err
+	}
+
+	return user, nil
+}
+
+func DeleteUser(id int) (*models.User, error) {
+	var err error
+	var user models.User
+	var db = utils.DBConn()
+
+	err = db.Find(&user, id).Error
+
+	if err != nil {
+		return &models.User{}, err
+	}
+
+	err = db.Delete(&user, id).Error
+
+	if err != nil {
+		return &models.User{}, err
+	}
+
+	return &user, nil
+}
