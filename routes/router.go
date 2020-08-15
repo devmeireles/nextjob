@@ -24,6 +24,9 @@ func (server *Server) SetupRoutes() *mux.Router {
 	r.HandleFunc("/skill/{id}", controller.DeleteSkill).Methods("DELETE")
 
 	// User routes
+	r.HandleFunc("/user/address", controller.CreateUserAddress).Methods("POST")
+	r.HandleFunc("/user/address", controller.UpdateUserAddress).Methods("PUT")
+
 	r.HandleFunc("/user", controller.CreateUser).Methods("POST")
 	r.HandleFunc("/users", controller.GetAllUsers).Methods("GET")
 	r.HandleFunc("/user/{id}", controller.GetUser).Methods("GET")

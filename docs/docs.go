@@ -224,6 +224,72 @@ var doc = `{
                 }
             }
         },
+        "/user/address": {
+            "put": {
+                "description": "Update the user address corresponding to the input id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update user address identified by the given id",
+                "parameters": [
+                    {
+                        "description": "Update user address",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Address"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Address"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new user address with the input paylod",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Create a new user address",
+                "parameters": [
+                    {
+                        "description": "Create a user address",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Address"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Address"
+                        }
+                    }
+                }
+            }
+        },
         "/user/{id}": {
             "get": {
                 "description": "Get details of user corresponding to the input id",
@@ -350,6 +416,29 @@ var doc = `{
         }
     },
     "definitions": {
+        "models.Address": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "line": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "zipcode": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Skill": {
             "type": "object",
             "properties": {
@@ -364,6 +453,10 @@ var doc = `{
         "models.User": {
             "type": "object",
             "properties": {
+                "address": {
+                    "type": "object",
+                    "$ref": "#/definitions/models.Address"
+                },
                 "email": {
                     "type": "string"
                 },

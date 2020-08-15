@@ -150,3 +150,64 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 
 	utils.ResTrue(w)
 }
+
+// CreateUserAddress godoc
+// @Summary Create a new user address
+// @Description Create a new user address with the input paylod
+// @Tags users
+// @Accept  json
+// @Produce  json
+// @Param user body models.Address true "Create a user address"
+// @Success 200 {object} models.Address
+// @Router /user/address [post]
+func CreateUserAddress(w http.ResponseWriter, r *http.Request) {
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	userAddress := models.Address{}
+	err = json.Unmarshal(body, &userAddress)
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	newUserAddress, err := services.CreateUserAddress(&userAddress)
+
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+	utils.ResSuc(w, newUserAddress)
+}
+
+// UpdateUserAddress godoc
+// @Summary Update user address identified by the given id
+// @Description Update the user address corresponding to the input id
+// @Tags users
+// @Accept  json
+// @Produce  json
+// @Param user body models.Address true "Update user address"
+// @Success 200 {object} models.Address
+// @Router /user/address [put]
+func UpdateUserAddress(w http.ResponseWriter, r *http.Request) {
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	userAddress := models.Address{}
+	err = json.Unmarshal(body, &userAddress)
+
+	updatedUserAddress, err := services.UpdateUserAddress(&userAddress)
+
+	if err != nil {
+		utils.ResErr(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	utils.ResSuc(w, updatedUserAddress)
+}

@@ -24,7 +24,11 @@ func InitDatabase(Dbdriver, DbUser, DbPassword, DbPort, DbHost, DbName string) {
 	db.AutoMigrate(
 		models.Skill{},
 		models.User{},
-		models.Address{})
+		models.Address{},
+	)
+
+	db.Model(models.Address{}).AddForeignKey("user_id", "users(id)", "CASCADE", "CASCADE")
+
 }
 
 func DBConn() *gorm.DB {
