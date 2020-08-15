@@ -1,5 +1,20 @@
 basePath: /
 definitions:
+  models.Address:
+    properties:
+      city:
+        type: string
+      country:
+        type: string
+      line:
+        type: string
+      state:
+        type: string
+      user_id:
+        type: integer
+      zipcode:
+        type: string
+    type: object
   models.Skill:
     properties:
       status:
@@ -222,6 +237,49 @@ paths:
           schema:
             $ref: '#/definitions/models.User'
       summary: Update user identified by the given id
+      tags:
+      - users
+  /user/address:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user address with the input paylod
+      parameters:
+      - description: Create a user address
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.Address'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Address'
+      summary: Create a new user address
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: Update the user address corresponding to the input id
+      parameters:
+      - description: Update user address
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.Address'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Address'
+      summary: Update user address identified by the given id
       tags:
       - users
   /users:
