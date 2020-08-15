@@ -1,3 +1,4 @@
+basePath: /
 definitions:
   models.Skill:
     properties:
@@ -19,9 +20,18 @@ definitions:
       username:
         type: string
     type: object
+host: localhost:3333
 info:
-  contact: {}
-  license: {}
+  contact:
+    email: dev.meireles@gmail.com
+    name: API Support
+  description: This is the NextJob API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: NextJob API
+  version: "1.0"
 paths:
   /skill:
     post:

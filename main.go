@@ -13,8 +13,17 @@ import (
 
 var server = routes.Server{}
 
+// @title NextJob API
+// @version 1.0
+// @description This is the NextJob API
+// @termsOfService http://swagger.io/terms/
+// @contact.name API Support
+// @contact.email dev.meireles@gmail.com
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @host localhost:3333
+// @BasePath /
 func main() {
-
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println(err)
