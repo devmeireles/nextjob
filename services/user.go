@@ -34,7 +34,7 @@ func GetUser(id int) (*models.User, error) {
 	var user models.User
 	var err error
 
-	err = db.Find(&user, id).Error
+	err = db.Where("id = ?", id).Preload("Address").Find(&user).Error
 
 	if err != nil {
 		return &models.User{}, err
@@ -86,7 +86,7 @@ func CreateUserAddress(address *models.Address) (*models.Address, error) {
 func UpdateUserAddress(address *models.Address) (*models.Address, error) {
 	var db = utils.DBConn()
 
-	if err := db.Model(&models.Address{}).Where("id = ?", address.UserID).Update(&address).Error; err != nil {
+	if err := db.Debug().Model(&models.Address{}).Where("user_id = ?", address.UserID).Update(&address).Error; err != nil {
 		return &models.Address{}, err
 	}
 
