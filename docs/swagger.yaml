@@ -24,6 +24,9 @@ definitions:
     type: object
   models.User:
     properties:
+      address:
+        $ref: '#/definitions/models.Address'
+        type: object
       email:
         type: string
       language:

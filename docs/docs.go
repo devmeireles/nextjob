@@ -453,6 +453,10 @@ var doc = `{
         "models.User": {
             "type": "object",
             "properties": {
+                "address": {
+                    "type": "object",
+                    "$ref": "#/definitions/models.Address"
+                },
                 "email": {
                     "type": "string"
                 },
