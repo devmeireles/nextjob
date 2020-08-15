@@ -8,11 +8,17 @@ import (
 
 	"github.com/devmeireles/nextjob/routes"
 	"github.com/devmeireles/nextjob/utils"
+	"github.com/joho/godotenv"
 )
 
 var server = routes.Server{}
 
 func main() {
+
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	dbDriver := os.Getenv("DB_DRIVER")
 	if dbDriver == "" {
