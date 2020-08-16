@@ -19,6 +19,11 @@
     "paths": {
         "/api/skill": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new skill with the input",
                 "consumes": [
                     "application/json"
@@ -53,6 +58,11 @@
         },
         "/api/skill/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get details of skill corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -83,6 +93,11 @@
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update the skill corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -122,6 +137,11 @@
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete the skill corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -151,6 +171,11 @@
         },
         "/api/skills": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get details of all skills",
                 "consumes": [
                     "application/json"
@@ -177,6 +202,11 @@
         },
         "/api/user/address": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update the user address corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -209,6 +239,11 @@
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new user address with the input paylod",
                 "consumes": [
                     "application/json"
@@ -243,6 +278,11 @@
         },
         "/api/user/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get details of user corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -273,6 +313,11 @@
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update the user corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -312,6 +357,11 @@
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete the user corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -341,6 +391,11 @@
         },
         "/api/users": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get details of all users",
                 "consumes": [
                     "application/json"
@@ -499,6 +554,13 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }

@@ -34,6 +34,11 @@ var doc = `{
     "paths": {
         "/api/skill": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new skill with the input",
                 "consumes": [
                     "application/json"
@@ -68,6 +73,11 @@ var doc = `{
         },
         "/api/skill/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get details of skill corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -98,6 +108,11 @@ var doc = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update the skill corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -137,6 +152,11 @@ var doc = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete the skill corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -166,6 +186,11 @@ var doc = `{
         },
         "/api/skills": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get details of all skills",
                 "consumes": [
                     "application/json"
@@ -192,6 +217,11 @@ var doc = `{
         },
         "/api/user/address": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update the user address corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -224,6 +254,11 @@ var doc = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new user address with the input paylod",
                 "consumes": [
                     "application/json"
@@ -258,6 +293,11 @@ var doc = `{
         },
         "/api/user/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get details of user corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -288,6 +328,11 @@ var doc = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update the user corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -327,6 +372,11 @@ var doc = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete the user corresponding to the input id",
                 "consumes": [
                     "application/json"
@@ -356,6 +406,11 @@ var doc = `{
         },
         "/api/users": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get details of all users",
                 "consumes": [
                     "application/json"
@@ -514,6 +569,13 @@ var doc = `{
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }`

@@ -74,6 +74,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Skill'
+      security:
+      - ApiKeyAuth: []
       summary: Create a new skill
       tags:
       - skills
@@ -93,6 +95,8 @@ paths:
       responses:
         "204":
           description: No Content
+      security:
+      - ApiKeyAuth: []
       summary: Delete skill identified by the given id
       tags:
       - skills
@@ -113,6 +117,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Skill'
+      security:
+      - ApiKeyAuth: []
       summary: Get details for a given skill id
       tags:
       - skills
@@ -139,6 +145,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Skill'
+      security:
+      - ApiKeyAuth: []
       summary: Update skill identified by the given id
       tags:
       - skills
@@ -156,6 +164,8 @@ paths:
             items:
               $ref: '#/definitions/models.Skill'
             type: array
+      security:
+      - ApiKeyAuth: []
       summary: Get details of all skills
       tags:
       - skills
@@ -175,6 +185,8 @@ paths:
       responses:
         "204":
           description: No Content
+      security:
+      - ApiKeyAuth: []
       summary: Delete user identified by the given id
       tags:
       - users
@@ -195,6 +207,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.User'
+      security:
+      - ApiKeyAuth: []
       summary: Get details for a given user id
       tags:
       - users
@@ -221,6 +235,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.User'
+      security:
+      - ApiKeyAuth: []
       summary: Update user identified by the given id
       tags:
       - users
@@ -243,6 +259,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Address'
+      security:
+      - ApiKeyAuth: []
       summary: Create a new user address
       tags:
       - users
@@ -264,6 +282,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Address'
+      security:
+      - ApiKeyAuth: []
       summary: Update user address identified by the given id
       tags:
       - users
@@ -281,6 +301,8 @@ paths:
             items:
               $ref: '#/definitions/models.User'
             type: array
+      security:
+      - ApiKeyAuth: []
       summary: Get details of all users
       tags:
       - users
@@ -328,4 +350,9 @@ paths:
       summary: Create a new user
       tags:
       - auth
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"
