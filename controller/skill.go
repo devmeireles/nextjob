@@ -19,6 +19,7 @@ import (
 // @Tags skills
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {array} models.Skill
 // @Router /api/skills [get]
 func GetAllSkills(w http.ResponseWriter, r *http.Request) {
@@ -38,6 +39,7 @@ func GetAllSkills(w http.ResponseWriter, r *http.Request) {
 // @Tags skills
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param id path int true "ID of the skill"
 // @Success 200 {object} models.Skill
 // @Router /api/skill/{id} [get]
@@ -65,6 +67,7 @@ func GetSkill(w http.ResponseWriter, r *http.Request) {
 // @Tags skills
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param skill body models.Skill true "Create a skill"
 // @Success 200 {object} models.Skill
 // @Router /api/skill [post]
@@ -98,6 +101,7 @@ func CreateSkill(w http.ResponseWriter, r *http.Request) {
 // @Tags skills
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param id path int true "ID of the skill to be updated"
 // @Param skill body models.Skill true "Create skill"
 // @Success 200 {object} models.Skill
@@ -131,6 +135,7 @@ func UpdateSkill(w http.ResponseWriter, r *http.Request) {
 // @Tags skills
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param id path int true "ID of the skill to be deleted"
 // @Success 204 "No Content"
 // @Router /api/skill/{id} [delete]

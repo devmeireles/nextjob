@@ -18,6 +18,7 @@ import (
 // @Tags users
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {array} models.User
 // @Router /api/users [get]
 func GetAllUsers(w http.ResponseWriter, r *http.Request) {
@@ -37,6 +38,7 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 // @Tags users
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param id path int true "ID of the user"
 // @Success 200 {object} models.User
 // @Router /api/user/{id} [get]
@@ -64,6 +66,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 // @Tags users
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param id path int true "ID of the user to be updated"
 // @Param user body models.User true "Update user"
 // @Success 200 {object} models.User
@@ -97,6 +100,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 // @Tags users
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param id path int true "ID of the user to be deleted"
 // @Success 204 "No Content"
 // @Router /api/user/{id} [delete]
@@ -125,6 +129,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 // @Tags users
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param user body models.Address true "Create a user address"
 // @Success 200 {object} models.Address
 // @Router /api/user/address [post]
@@ -157,6 +162,7 @@ func CreateUserAddress(w http.ResponseWriter, r *http.Request) {
 // @Tags users
 // @Accept  json
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param user body models.Address true "Update user address"
 // @Success 200 {object} models.Address
 // @Router /api/user/address [put]

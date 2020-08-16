@@ -23,6 +23,9 @@ var server = routes.Server{}
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 // @host localhost:3333
 // @BasePath /
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 	err := godotenv.Load()
 	if err != nil {
