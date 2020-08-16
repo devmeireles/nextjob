@@ -43,6 +43,20 @@ func GetUser(id int) (*models.User, error) {
 	return &user, nil
 }
 
+func GetUsername(username string) (*models.User, error) {
+	var db = utils.DBConn()
+	var user models.User
+	var err error
+
+	err = db.Where("username = ?", username).Find(&user).Error
+
+	if err != nil {
+		return &models.User{}, err
+	}
+
+	return &user, nil
+}
+
 func UpdateUser(user *models.User, id int) (*models.User, error) {
 	var db = utils.DBConn()
 
