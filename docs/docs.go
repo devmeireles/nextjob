@@ -32,7 +32,7 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/skill": {
+        "/api/skill": {
             "post": {
                 "description": "Create a new skill with the input",
                 "consumes": [
@@ -66,7 +66,7 @@ var doc = `{
                 }
             }
         },
-        "/skill/{id}": {
+        "/api/skill/{id}": {
             "get": {
                 "description": "Get details of skill corresponding to the input id",
                 "consumes": [
@@ -164,7 +164,7 @@ var doc = `{
                 }
             }
         },
-        "/skills": {
+        "/api/skills": {
             "get": {
                 "description": "Get details of all skills",
                 "consumes": [
@@ -190,41 +190,7 @@ var doc = `{
                 }
             }
         },
-        "/user": {
-            "post": {
-                "description": "Create a new user with the input paylod",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "users"
-                ],
-                "summary": "Create a new user",
-                "parameters": [
-                    {
-                        "description": "Create user",
-                        "name": "user",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.User"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.User"
-                        }
-                    }
-                }
-            }
-        },
-        "/user/address": {
+        "/api/user/address": {
             "put": {
                 "description": "Update the user address corresponding to the input id",
                 "consumes": [
@@ -290,7 +256,7 @@ var doc = `{
                 }
             }
         },
-        "/user/{id}": {
+        "/api/user/{id}": {
             "get": {
                 "description": "Get details of user corresponding to the input id",
                 "consumes": [
@@ -388,7 +354,7 @@ var doc = `{
                 }
             }
         },
-        "/users": {
+        "/api/users": {
             "get": {
                 "description": "Get details of all users",
                 "consumes": [
@@ -409,6 +375,74 @@ var doc = `{
                             "items": {
                                 "$ref": "#/definitions/models.User"
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "description": "Generate a JWT to logged user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login with user and password to generate a JWT",
+                "parameters": [
+                    {
+                        "description": "Generate a JWT",
+                        "name": "auth",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UserLogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.UserLogin"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "description": "Create a new user with the input paylod",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Create a new user",
+                "parameters": [
+                    {
+                        "description": "Create user",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
                         }
                     }
                 }
@@ -453,10 +487,6 @@ var doc = `{
         "models.User": {
             "type": "object",
             "properties": {
-                "address": {
-                    "type": "object",
-                    "$ref": "#/definitions/models.Address"
-                },
                 "email": {
                     "type": "string"
                 },
@@ -468,6 +498,17 @@ var doc = `{
                 },
                 "user_type": {
                     "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.UserLogin": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
                 },
                 "username": {
                     "type": "string"
