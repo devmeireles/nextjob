@@ -38,7 +38,6 @@ func (server *Server) SetupRoutes() *mux.Router {
 	// User routes
 	api.HandleFunc("/user/address", controller.CreateUserAddress).Methods("POST")
 	api.HandleFunc("/user/address", controller.UpdateUserAddress).Methods("PUT")
-	api.HandleFunc("/user", controller.CreateUser).Methods("POST")
 	api.HandleFunc("/users", controller.GetAllUsers).Methods("GET")
 	api.HandleFunc("/user/{id:[0-9]+}", controller.GetUser).Methods("GET")
 	api.HandleFunc("/user/{id:[0-9]+}", controller.UpdateUser).Methods("PUT")
