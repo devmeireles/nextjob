@@ -12,38 +12,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// CreateUser godoc
-// @Summary Create a new user
-// @Description Create a new user with the input paylod
-// @Tags users
-// @Accept  json
-// @Produce  json
-// @Param user body models.User true "Create user"
-// @Success 200 {object} models.User
-// @Router /user [post]
-func CreateUser(w http.ResponseWriter, r *http.Request) {
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		utils.ResErr(w, err, http.StatusInternalServerError)
-		return
-	}
-
-	user := models.User{}
-	err = json.Unmarshal(body, &user)
-	if err != nil {
-		utils.ResErr(w, err, http.StatusInternalServerError)
-		return
-	}
-
-	newUser, err := services.CreateUser(&user)
-
-	if err != nil {
-		utils.ResErr(w, err, http.StatusInternalServerError)
-		return
-	}
-	utils.ResSuc(w, newUser)
-}
-
 // GetAllUsers godoc
 // @Summary Get details of all users
 // @Description Get details of all users
@@ -51,7 +19,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 // @Accept  json
 // @Produce  json
 // @Success 200 {array} models.User
-// @Router /users [get]
+// @Router /api/users [get]
 func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	users, err := services.GetAllUsers()
 
@@ -71,7 +39,7 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param id path int true "ID of the user"
 // @Success 200 {object} models.User
-// @Router /user/{id} [get]
+// @Router /api/user/{id} [get]
 func GetUser(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
@@ -99,7 +67,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 // @Param id path int true "ID of the user to be updated"
 // @Param user body models.User true "Update user"
 // @Success 200 {object} models.User
-// @Router /user/{id} [put]
+// @Router /api/user/{id} [put]
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
@@ -131,7 +99,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param id path int true "ID of the user to be deleted"
 // @Success 204 "No Content"
-// @Router /user/{id} [delete]
+// @Router /api/user/{id} [delete]
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
@@ -159,7 +127,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param user body models.Address true "Create a user address"
 // @Success 200 {object} models.Address
-// @Router /user/address [post]
+// @Router /api/user/address [post]
 func CreateUserAddress(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -191,7 +159,7 @@ func CreateUserAddress(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param user body models.Address true "Update user address"
 // @Success 200 {object} models.Address
-// @Router /user/address [put]
+// @Router /api/user/address [put]
 func UpdateUserAddress(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {

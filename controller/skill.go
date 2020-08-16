@@ -20,7 +20,7 @@ import (
 // @Accept  json
 // @Produce  json
 // @Success 200 {array} models.Skill
-// @Router /skills [get]
+// @Router /api/skills [get]
 func GetAllSkills(w http.ResponseWriter, r *http.Request) {
 	skills, err := services.GetAllSkills()
 
@@ -40,7 +40,7 @@ func GetAllSkills(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param id path int true "ID of the skill"
 // @Success 200 {object} models.Skill
-// @Router /skill/{id} [get]
+// @Router /api/skill/{id} [get]
 func GetSkill(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
@@ -67,7 +67,7 @@ func GetSkill(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param skill body models.Skill true "Create a skill"
 // @Success 200 {object} models.Skill
-// @Router /skill [post]
+// @Router /api/skill [post]
 func CreateSkill(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -101,7 +101,7 @@ func CreateSkill(w http.ResponseWriter, r *http.Request) {
 // @Param id path int true "ID of the skill to be updated"
 // @Param skill body models.Skill true "Create skill"
 // @Success 200 {object} models.Skill
-// @Router /skill/{id} [put]
+// @Router /api/skill/{id} [put]
 func UpdateSkill(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
@@ -133,7 +133,7 @@ func UpdateSkill(w http.ResponseWriter, r *http.Request) {
 // @Produce  json
 // @Param id path int true "ID of the skill to be deleted"
 // @Success 204 "No Content"
-// @Router /skill/{id} [delete]
+// @Router /api/skill/{id} [delete]
 func DeleteSkill(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
