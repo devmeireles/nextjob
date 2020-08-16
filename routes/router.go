@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/devmeireles/nextjob/controller"
+	"github.com/devmeireles/nextjob/middlewares"
 
 	"github.com/gorilla/mux"
 
@@ -16,24 +17,31 @@ type Server struct {
 func (server *Server) SetupRoutes() *mux.Router {
 	r := mux.NewRouter()
 
+	// Auth Routes
+	auth := r.PathPrefix("/auth").Subrouter()
+	auth.HandleFunc("/login", controller.Login).Methods("POST")
+	auth.HandleFunc("/register", controller.CreateUser).Methods("POST")
+
+	// Swagger Routes
+	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
+
+	api := r.PathPrefix("/api").Subrouter()
+	api.Use(middlewares.AuthJwtVerify)
+
 	// Skill routes
-	r.HandleFunc("/skills", controller.GetAllSkills).Methods("GET")
-	r.HandleFunc("/skill/{id}", controller.GetSkill).Methods("GET")
-	r.HandleFunc("/skill", controller.CreateSkill).Methods("POST")
-	r.HandleFunc("/skill/{id}", controller.UpdateSkill).Methods("PUT")
-	r.HandleFunc("/skill/{id}", controller.DeleteSkill).Methods("DELETE")
+	api.HandleFunc("/skills", controller.GetAllSkills).Methods("GET")
+	api.HandleFunc("/skill/{id:[0-9]+}", controller.GetSkill).Methods("GET")
+	api.HandleFunc("/skill", controller.CreateSkill).Methods("POST")
+	api.HandleFunc("/skill/{id:[0-9]+}", controller.UpdateSkill).Methods("PUT")
+	api.HandleFunc("/skill/{id:[0-9]+}", controller.DeleteSkill).Methods("DELETE")
 
 	// User routes
-	r.HandleFunc("/user/address", controller.CreateUserAddress).Methods("POST")
-	r.HandleFunc("/user/address", controller.UpdateUserAddress).Methods("PUT")
-
-	r.HandleFunc("/user", controller.CreateUser).Methods("POST")
-	r.HandleFunc("/users", controller.GetAllUsers).Methods("GET")
-	r.HandleFunc("/user/{id}", controller.GetUser).Methods("GET")
-	r.HandleFunc("/user/{id}", controller.UpdateUser).Methods("PUT")
-	r.HandleFunc("/user/{id}", controller.DeleteUser).Methods("DELETE")
-
-	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
+	api.HandleFunc("/user/address", controller.CreateUserAddress).Methods("POST")
+	api.HandleFunc("/user/address", controller.UpdateUserAddress).Methods("PUT")
+	api.HandleFunc("/users", controller.GetAllUsers).Methods("GET")
+	api.HandleFunc("/user/{id:[0-9]+}", controller.GetUser).Methods("GET")
+	api.HandleFunc("/user/{id:[0-9]+}", controller.UpdateUser).Methods("PUT")
+	api.HandleFunc("/user/{id:[0-9]+}", controller.DeleteUser).Methods("DELETE")
 
 	server.Router = r
 

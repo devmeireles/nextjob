@@ -24,9 +24,6 @@ definitions:
     type: object
   models.User:
     properties:
-      address:
-        $ref: '#/definitions/models.Address'
-        type: object
       email:
         type: string
       language:
@@ -35,6 +32,13 @@ definitions:
         type: string
       user_type:
         type: integer
+      username:
+        type: string
+    type: object
+  models.UserLogin:
+    properties:
+      password:
+        type: string
       username:
         type: string
     type: object
@@ -51,7 +55,7 @@ info:
   title: NextJob API
   version: "1.0"
 paths:
-  /skill:
+  /api/skill:
     post:
       consumes:
       - application/json
@@ -70,10 +74,12 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Skill'
+      security:
+      - ApiKeyAuth: []
       summary: Create a new skill
       tags:
       - skills
-  /skill/{id}:
+  /api/skill/{id}:
     delete:
       consumes:
       - application/json
@@ -89,6 +95,8 @@ paths:
       responses:
         "204":
           description: No Content
+      security:
+      - ApiKeyAuth: []
       summary: Delete skill identified by the given id
       tags:
       - skills
@@ -109,6 +117,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Skill'
+      security:
+      - ApiKeyAuth: []
       summary: Get details for a given skill id
       tags:
       - skills
@@ -135,10 +145,12 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Skill'
+      security:
+      - ApiKeyAuth: []
       summary: Update skill identified by the given id
       tags:
       - skills
-  /skills:
+  /api/skills:
     get:
       consumes:
       - application/json
@@ -152,32 +164,12 @@ paths:
             items:
               $ref: '#/definitions/models.Skill'
             type: array
+      security:
+      - ApiKeyAuth: []
       summary: Get details of all skills
       tags:
       - skills
-  /user:
-    post:
-      consumes:
-      - application/json
-      description: Create a new user with the input paylod
-      parameters:
-      - description: Create user
-        in: body
-        name: user
-        required: true
-        schema:
-          $ref: '#/definitions/models.User'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.User'
-      summary: Create a new user
-      tags:
-      - users
-  /user/{id}:
+  /api/user/{id}:
     delete:
       consumes:
       - application/json
@@ -193,6 +185,8 @@ paths:
       responses:
         "204":
           description: No Content
+      security:
+      - ApiKeyAuth: []
       summary: Delete user identified by the given id
       tags:
       - users
@@ -213,6 +207,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.User'
+      security:
+      - ApiKeyAuth: []
       summary: Get details for a given user id
       tags:
       - users
@@ -239,10 +235,12 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.User'
+      security:
+      - ApiKeyAuth: []
       summary: Update user identified by the given id
       tags:
       - users
-  /user/address:
+  /api/user/address:
     post:
       consumes:
       - application/json
@@ -261,6 +259,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Address'
+      security:
+      - ApiKeyAuth: []
       summary: Create a new user address
       tags:
       - users
@@ -282,10 +282,12 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Address'
+      security:
+      - ApiKeyAuth: []
       summary: Update user address identified by the given id
       tags:
       - users
-  /users:
+  /api/users:
     get:
       consumes:
       - application/json
@@ -299,7 +301,58 @@ paths:
             items:
               $ref: '#/definitions/models.User'
             type: array
+      security:
+      - ApiKeyAuth: []
       summary: Get details of all users
       tags:
       - users
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Generate a JWT to logged user
+      parameters:
+      - description: Generate a JWT
+        in: body
+        name: auth
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserLogin'
+      summary: Login with user and password to generate a JWT
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user with the input paylod
+      parameters:
+      - description: Create user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Create a new user
+      tags:
+      - auth
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"
